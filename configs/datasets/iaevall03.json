@@ -53,13 +53,13 @@
     "HSURF": {
       "description": "surface elevation above sea level",
       "directory": "HSURF",
-      "file_pattern": "*.ncz",
+      "file_pattern": "*.nc",
       "native_temporal_resolution": "single_time_step"
     },
     "FR_LAND": {
       "description": "the ratio of the land in the grid cell",
       "directory": "FR_LAND",
-      "file_pattern": "*.ncz",
+      "file_pattern": "*.nc",
       "native_temporal_resolution": "single_time_step"
     },
     "HPBL": {
