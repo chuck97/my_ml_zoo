@@ -1,0 +1,78 @@
+{
+  "dataset_name": "IAEVALL03",
+  "description": "ERA5-driven historical ICON-CLM regional climate model run over Europe",
+  "base_directory": "/work/bb1364/production_runs/work/IAEVALL03/yearly",
+  "file_format": "ncz",
+  "storage_layout": {
+    "variables_in_subdirectories": true,
+    "default_file_pattern": "*.ncz"
+  },
+  "variables": {
+    "T_2M": {
+      "description": "2 meter temperature",
+      "directory": "T_2M",
+      "file_pattern": "*.ncz",
+      "native_temporal_resolution": "hourly"
+    },
+    "TOT_PREC": {
+      "description": "total precipitation",
+      "directory": "TOT_PREC",
+      "file_pattern": "*.ncz",
+      "native_temporal_resolution": "hourly"
+    },
+    "ASOD_S": {
+      "description": "average downward short-wave radiation flux",
+      "directory": "ASOD_S",
+      "file_pattern": "*.ncz",
+      "native_temporal_resolution": "hourly"
+    },
+    "ACLCT": {
+      "description": "average total cloud cover",
+      "directory": "ACLCT",
+      "file_pattern": "*.ncz",
+      "native_temporal_resolution": "hourly"
+    },
+    "U_10M": {
+      "description": "zonal wind in 10m",
+      "directory": "U_10M",
+      "file_pattern": "*.ncz",
+      "native_temporal_resolution": "hourly"
+    },
+    "V_10M": {
+      "description": "meridional wind in 10m",
+      "directory": "V_10M",
+      "file_pattern": "*.ncz",
+      "native_temporal_resolution": "hourly"
+    },
+    "PMSL": {
+      "description": "mean sea level pressure",
+      "directory": "PMSL",
+      "file_pattern": "*.ncz",
+      "native_temporal_resolution": "hourly"
+    },
+    "HSURF": {
+      "description": "surface elevation above sea level",
+      "directory": "HSURF",
+      "file_pattern": "*.ncz",
+      "native_temporal_resolution": "single_time_step"
+    },
+    "FR_LAND": {
+      "description": "the ratio of the land in the grid cell",
+      "directory": "FR_LAND",
+      "file_pattern": "*.ncz",
+      "native_temporal_resolution": "single_time_step"
+    },
+    "HPBL": {
+      "description": "height of planetary boundary level",
+      "directory": "HPBL",
+      "file_pattern": "*.ncz",
+      "native_temporal_resolution": "hourly"
+    },
+    "RELHUM_2M": {
+      "description": "relative humidity in 2m",
+      "directory": "RELHUM_2M",
+      "file_pattern": "*.ncz",
+      "native_temporal_resolution": "hourly"
+    }
+  }
+}
