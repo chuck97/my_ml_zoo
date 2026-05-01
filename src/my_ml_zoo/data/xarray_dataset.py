@@ -1,22 +1,12 @@
 """Xarray dataset loading helpers for variables defined in a DatasetConfig."""
 
 from pathlib import Path
-import re
 from typing import Dict, Iterable, List, Optional
 
 import xarray as xr
 
 from .dataset_config import DatasetConfig
 from .file_discovery import discover_variable_files, select_variable_file
-
-
-def _infer_year_from_filename(path: Path) -> Optional[int]:
-    """Try to infer the year from a filename when no time coordinate is available."""
-    for match in re.finditer(r"(19|20)\d{2}", path.name):
-        year = int(match.group(0))
-        if 1900 <= year <= 2100:
-            return year
-    return None
 
 
 def open_variable_dataset(
@@ -47,30 +37,20 @@ def read_time_variable(
     **open_kwargs,
 ) -> xr.DataArray:
     """Open only the time coordinate from a single netCDF file."""
-    ds = xr.open_dataset(path, decode_times=decode_times, **open_kwargs)
-    if time_variable not in ds.variables and time_variable not in ds.coords:
-        raise KeyError(f"Time variable '{time_variable}' not found in {path}")
-    return ds[time_variable]
+    with xr.open_dataset(path, decode_times=decode_times, **open_kwargs) as ds:
+        if time_variable not in ds.variables and time_variable not in ds.coords:
+            raise KeyError(f"Time variable '{time_variable}' not found in {path}")
+        return ds[time_variable].load()
 
 
 def infer_file_year(
     path: Path,
     time_variable: str = "time",
     decode_times: bool = True,
-    fallback_to_filename: bool = True,
     **open_kwargs,
 ) -> int:
-    """Infer the year for a netCDF file from its time coordinate or filename."""
-    try:
-        time_values = read_time_variable(path, time_variable=time_variable, decode_times=decode_times, **open_kwargs)
-    except KeyError:
-        if not fallback_to_filename:
-            raise
-        year = _infer_year_from_filename(path)
-        if year is None:
-            raise ValueError(f"Unable to infer year for file without time coordinate: {path}")
-        return year
-
+    """Infer the year for a netCDF file from its time coordinate."""
+    time_values = read_time_variable(path, time_variable=time_variable, decode_times=decode_times, **open_kwargs)
     if time_values.size == 0:
         raise ValueError(f"No time values found in file: {path}")
 

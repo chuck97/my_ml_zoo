@@ -42,11 +42,6 @@ class VariableConfig:
         """Return True when the variable contains a time coordinate series."""
         return self.native_temporal_resolution != "single_time_step"
 
-    @property
-    def is_static(self) -> bool:
-        """Return True when the variable is a static single-time-step dataset."""
-        return not self.is_time_series
-
 
 @dataclass(frozen=True)
 class DatasetConfig:
